@@ -9,7 +9,9 @@ use Mcpuishor\CourierManager\Exceptions\CourierServiceNotAvailableException;
 
 class CourierManager implements CourierManagerInterface
 {
-    private Courier $courier;
+    public function __construct(
+        private Courier $courier
+    ){}
 
     public function courier(Courier $courier): self
     {
