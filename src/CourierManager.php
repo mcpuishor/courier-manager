@@ -5,7 +5,8 @@ namespace Mcpuishor\CourierManager;
 use Mcpuishor\CourierManager\Contracts\{Courier, CourierManager as CourierManagerInterface};
 use Mcpuishor\CourierManager\DataObjects\{Booking, Consignment, Label};
 use Mcpuishor\CourierManager\Enums\LabelFileFormat;
-use Mcpuishor\CourierManager\Exceptions\CourierServiceNotAvailableException;
+use Mcpuishor\CourierManager\Exceptions\EndpointNotAvailableException;
+use Mcpuishor\CourierManager\Exceptions\ServiceNotAvailableException;
 
 class CourierManager implements CourierManagerInterface
 {
@@ -21,12 +22,17 @@ class CourierManager implements CourierManagerInterface
     }
 
     /**
-     * @throws CourierServiceNotAvailableException
+     * @throws ServiceNotAvailableException
+     * @throws EndpointNotAvailableException
      */
     public function book(Booking $booking): Consignment
     {
+        if (!$this->courier->isEndpointAvailable()) {
+            throw new EndpointNotAvailableException();
+        }
+
        if (!$this->courier->isServiceAvailable($booking)) {
-            throw new CourierServiceNotAvailableException();
+            throw new ServiceNotAvailableException();
        }
 
         return $this->courier->book($booking);
