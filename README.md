@@ -33,4 +33,35 @@ and make use of the contracts and data structures defined.
 ## Configuring Courier Manager's default courier
 
 Multiple couriers can be used at the same time, by extending in `AppServiceProvider.php` 
-or by specifying at runtime the courier driver to be used. 
+or by specifying at runtime the courier driver to be used.
+
+## Usage
+
+To instantiate a new Courier Manager with the default settings, use the facade:
+
+``` 
+use Mcpuishor\CourierManager\Facades\CourierManager;
+
+$booking = new Booking(
+        reference: 'YOUR INTERNAL REFERENCE',
+        service: 'COURIER SERVICE',
+        to: $customer_address,
+        from: $merchant_address,
+        deliveryInstructions: 'Leave somewhere safe',
+        packages: $packages,
+    );
+
+$consignment = CourierManager::book($booking);
+```
+
+If a different courier than the default needs to be used: 
+
+```
+$consignment = CourierManager::courier('courier-identifier-string')->book($booking);
+```
+
+The Courier Manager will return a Consignment once the booking is successful. 
+If the service is not available at the selected courier's end point, 
+a ``\Mcpuishor\CourierManager\Exceptions\CourierServiceNotAvailableException`` is thrown.
+
+Other exceptions are thrown by the respective driver package if booking is unsuccessful.
