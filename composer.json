@@ -1,0 +1,36 @@
+{
+    "name": "mcpuishor/courier-manager",
+    "description": "Manager for courier driver packages",
+    "autoload": {
+        "psr-4": {
+            "Mcpuishor\\CourierManager\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Mcpuishor\\CourierManager\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Robert",
+            "email": "rtudor@palmcentre.co.uk"
+        }
+    ],
+    "require": {
+        "php" : "^8.2",
+        "illuminate/support": "^10.13"
+    },
+    "config": {
+        "sort-packages": true,
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Mcpuishor\\CourierManager\\Providers\\CourierManagerServiceProvider"
+            ]
+        }
+    }
+  }
