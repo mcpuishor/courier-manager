@@ -19,7 +19,9 @@
     ],
     "require": {
         "php" : "^8.2",
-        "illuminate/support": "^10.13"
+        "illuminate/support": "^10.13",
+        "wendelladriel/laravel-validated-dto": "^2.11"
+
     },
     "config": {
         "sort-packages": true,
